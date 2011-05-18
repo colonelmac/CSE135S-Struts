@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<struts-config>
+	
+	<form-beans>
+			<form-bean name="registerForm" type="app.RegisterForm" />
+			<form-bean name="nameForm" type="CSE135S.Struts.dataentry.forms.NameForm" />
+	</form-beans> 	
+
+	<action-mappings>
+		<action path="/register"
+				type="app.RegisterAction"
+				name="registerForm"
+				input="/register.jsp">
+			<forward name="success" path="/success.html" />
+			<forward name="failure" path="/failure.html" />
+		</action>
+
+		<action path="/name"
+				type="CSE135S.Struts.dataentry.actions.NameAction"
+				scope="request"
+				name="nameForm"
+				input="/name.jsp">
+			<forward name="success" path="/countryOfCitizenship.do" /> 
+		</action>
+		
+		<action path="/countryOfCitizenship"
+				type="CSE135S.Struts.dataentry.actions.CitizenshipAction">
+			<forward name="success" path="/countryOfCitizenship.jsp" />
+		</action>
+		
+		<action path="/countryOfResidence"
+				type="CSE135S.Struts.dataentry.actions.ResidenceAction">
+			<forward name="success" path="/countryOfResidence.jsp" />
+		</action>
+	</action-mappings>
+
+</struts-config>

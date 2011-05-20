@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<h2>Select Country of Residence</h2>
+<h2>Select University Location</h2>
 
 <ul>
 <% 
@@ -16,8 +16,8 @@
 
 	while(locations.next())
 	{
-		out.println("<li><a href='processResidence.do?residenceID=" + locations.getInt("id") + 
-					"&residenceName=" + locations.getString("name") + "' >");
+		out.println("<li><a href='provideDegreeUniversity.do?universityLocationID=" + locations.getInt("id") + 
+					"&universityLocationName=" + locations.getString("name") + "' >");
 		out.println(locations.getString("name"));
 		out.println("</a></li>");
 	}

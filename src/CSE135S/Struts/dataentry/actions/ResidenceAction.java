@@ -20,18 +20,7 @@ public class ResidenceAction extends Action
 		session.setAttribute("citizenshipID", request.getParameter("citizenshipID"));
 		session.setAttribute("citizenshipName", request.getParameter("citizenshipName"));
 		
-		boolean inUS = request.getParameter("citizenshipName").equalsIgnoreCase("united states") ? true : false ; 
-		
-		RowSet locations = null;
-		
-		if(!inUS)
-		{
-			locations = LocationsModel.getAllCountries(false);
-		}
-		else
-		{
-			locations = LocationsModel.getAllStates();
-		}
+		RowSet locations = LocationsModel.getAllCountries(true);
 		
 		request.setAttribute("locations", locations);
 		

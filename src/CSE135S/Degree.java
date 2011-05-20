@@ -9,9 +9,9 @@ import java.util.Date;
 public class Degree {
 
 	public String title;
-	public String major;
-	public String specialization;
-	public String university;
+	public int major;
+	public int specialization;
+	public int university;
 	public java.sql.Date graduationDate;
 	public int gpa; 
 	public File transcript;
@@ -21,36 +21,22 @@ public class Degree {
 		
 	}
 	
-	public Degree(String major, int month, int year, String title, String university) {
+	public Degree(int major, int month, int year, String title, int university, int gpa) {
 		
 		this.title = title;
 		this.major = major;
 		this.university = university;
 		this.graduationDate = new java.sql.Date(year-1900, month, 1);
+		this.gpa = gpa;
 	}
 	 
-	public int getMajorID()
-	{
-		return SQL.getID("majors", major);
-	}
-	
-	public int getSpecializationID()
-	{
-		return SQL.getID("specializations", specialization);
-	}
-	
-	public int getUniversityID()
-	{
-		return SQL.getID("universities", university);
-	}
-	
 	public String toHTMLString()
 	{
 		StringBuilder sb = new StringBuilder(); 
 		
 		sb.append("<li>" + title + " " + major);
 		
-		if( specialization != null ) {
+		if( specialization == 0 ) {
 			
 			sb.append(" <em>with a specialization in</em> " + specialization + " ");
 		}

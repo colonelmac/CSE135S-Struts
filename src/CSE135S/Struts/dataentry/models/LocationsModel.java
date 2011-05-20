@@ -1,16 +1,15 @@
 package CSE135S.Struts.dataentry.models;
 
 import java.sql.*;
-import javax.sql.RowSet;
 import javax.sql.rowset.CachedRowSet;
 import com.sun.rowset.CachedRowSetImpl;
 
 public class LocationsModel 
 {	
 	private static String connectionString = "jdbc:postgresql://localhost/CSE135S?user=postgres&password=postgrespass";
-	private static String selectCountries = "SELECT id, name FROM locations WHERE isstate = 0";
+	private static String selectCountries = "SELECT id, name FROM locations WHERE isstate = '0'";
 	private static String selectCountriesWithoutUS = "SELECT id, name FROM locations WHERE name != 'United States'";
-	private static String selectStates = "SELECT id, name FROM locations WHERE isstate = 1";
+	private static String selectStates = "SELECT id, name FROM locations WHERE isstate = '1'";
 	
 	public static CachedRowSet getAllCountries(boolean includeUS) 
 	{		

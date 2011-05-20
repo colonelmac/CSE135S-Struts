@@ -8,6 +8,8 @@
 </head>
 <body>
 
+<h2>Select Country of Citizenship</h2>
+
 <ul>
 <% 
 	RowSet countries = (RowSet)request.getAttribute("countries");

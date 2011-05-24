@@ -289,7 +289,7 @@ public class SQL {
 		return id;
 	}
 
-	public static boolean incrementApplicantCount(String table, String name)
+	public static boolean incrementApplicantCount(String table, int name)
 	{
 		try
 		{	
@@ -300,7 +300,7 @@ public class SQL {
 			
 			Statement statement = connection.createStatement();
 			
-			int records = statement.executeUpdate("UPDATE " + table + " SET applicantcount = applicantcount+1 WHERE name='" + name + "'");
+			int records = statement.executeUpdate("UPDATE " + table + " SET applicantcount = applicantcount+1 WHERE id='" + name + "'");
 			
 			if(records == 1)
 				return true;

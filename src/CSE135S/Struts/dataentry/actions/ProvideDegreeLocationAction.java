@@ -27,7 +27,7 @@ public class ProvideDegreeLocationAction extends Action
 		
 		if(!isUSCitizen && !isUSResident)
 		{
-			locations = LocationsModel.getAllCountries(false);
+			locations = LocationsModel.getAllCountries(true);
 		}
 		else
 		{

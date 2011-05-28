@@ -15,8 +15,12 @@ public class ProvideDegreeMajorAction extends Action
 	{
 		HttpSession session = request.getSession();
 		
-		session.setAttribute("universityID", request.getParameter("universityID"));
-		session.setAttribute("universityName", request.getParameter("universityName"));
+		
+		if(request.getParameter("universityID") != null)
+		{
+			session.setAttribute("universityID", request.getParameter("universityID"));
+			session.setAttribute("universityName", request.getParameter("universityName"));
+		}
 		
 		RowSet majors = MajorsModel.getMajors();
 		

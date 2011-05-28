@@ -21,6 +21,8 @@ public class SubmitApplicationAction extends Action
 		
 		UUID uuid = UUID.randomUUID();
 		
+		session.setAttribute("uuid", uuid);
+		
 		try
 		{
 			Class.forName("org.postgresql.Driver");
@@ -29,35 +31,28 @@ public class SubmitApplicationAction extends Action
 										"user=postgres&password=postgrespass");
 			
 			PreparedStatement statement = connection.prepareStatement("INSERT INTO Applicants (firstname, lastname, middleinitial, countrycode, areacode, phonenumber, " +
-																	  "citizenshipid, residenceid, state, address, city, zipcode, uuid) " + 
-																      "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ); ", Statement.RETURN_GENERATED_KEYS);
+																	  "citizenshipid, residenceid, state, address, city, zipcode, uuid, user_name) " + 
+																      "VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ); ", Statement.RETURN_GENERATED_KEYS);
 			
 			statement.setString(1, (String)session.getAttribute("firstName"));
 			statement.setString(2, (String)session.getAttribute("lastName"));
 			statement.setString(3, (String)session.getAttribute("middleInitial"));
+						
+			statement.setNull(4, Types.INTEGER);
 			
-			if( session.getAttribute("countrycode") != null )
-			{
-				if( !session.getAttribute("countrycode").toString().equals("null") )
-					statement.setInt(4, Integer.parseInt(session.getAttribute("countrycode").toString()));
-			}
-			else
-			{
-				statement.setNull(4, Types.INTEGER);
-			}
+			statement.setInt(5, Integer.parseInt(session.getAttribute("areacode").toString()));
+			statement.setInt(6, Integer.parseInt(session.getAttribute("phoneNumber").toString()));
 			
-			statement.setInt(5, Integer.parseInt((String)session.getAttribute("areacode")));
-			statement.setInt(6, Integer.parseInt((String)session.getAttribute("phoneNumber")));
+			statement.setInt(7, Integer.parseInt(session.getAttribute("citizenshipID").toString()));
+			statement.setInt(8, Integer.parseInt(session.getAttribute("residenceID").toString()));
+			statement.setString(9, session.getAttribute("state").toString());
 			
-			statement.setInt(7, Integer.parseInt(session.getAttribute("citizenship").toString()));
-			statement.setInt(8, Integer.parseInt(session.getAttribute("residence").toString()));
-			statement.setInt(9, Integer.parseInt(session.getAttribute("state").toString()));
-			
-			statement.setString(10, (String)session.getAttribute("address"));
-			statement.setString(11, (String)session.getAttribute("city"));
-			statement.setInt(12, Integer.parseInt((String)session.getAttribute("zipcode")));
+			statement.setString(10, session.getAttribute("address").toString());
+			statement.setString(11, session.getAttribute("city").toString());
+			statement.setInt(12, Integer.parseInt(session.getAttribute("zipcode").toString()));
 			
 			statement.setObject(13, uuid); 
+			statement.setString(14, request.getRemoteUser().toString());
 			
 			statement.execute();
 			
@@ -91,7 +86,7 @@ public class SubmitApplicationAction extends Action
 		}
 		catch(Exception ex) 
 		{ 
-			//do something 
+			session.setAttribute("exception", ex);
 		}
 		
 		return mapping.findForward("success");

@@ -24,7 +24,7 @@ public class ProcessDegreeAction extends Action
 		int university = Integer.parseInt(session.getAttribute("universityID").toString());
 		String title = null;
 		
-		if(daf.get("major").toString().isEmpty())
+		if(((String)daf.get("major")).isEmpty())
 			errors.add("major", new ActionMessage("major is required"));
 		else
 			major = Integer.parseInt(daf.get("major").toString());
@@ -47,25 +47,29 @@ public class ProcessDegreeAction extends Action
 		if(daf.get("year").toString().isEmpty())
 			errors.add("year", new ActionMessage("year is required"));
 		
-		Degree degree = new Degree(major, month, year, title, university, gpa);
-		
-		ArrayList<Degree> degrees;
-		
-		if( session.getAttribute("degrees") == null)
-		{
-			degrees = new ArrayList<Degree>();
-		}
-		else
-		{
-			degrees = (ArrayList<Degree>)session.getAttribute("degrees");
-		}
-
-		degrees.add(degree);
-		
-		session.setAttribute("degrees", degrees);
+		saveErrors(request, errors);
 		
 		if(errors.isEmpty())
+		{
+			Degree degree = new Degree(major, month, year, title, university, gpa);
+			
+			ArrayList<Degree> degrees;
+			
+			if( session.getAttribute("degrees") == null)
+			{
+				degrees = new ArrayList<Degree>();
+			}
+			else
+			{
+				degrees = (ArrayList<Degree>)session.getAttribute("degrees");
+			}
+	
+			degrees.add(degree);
+			
+			session.setAttribute("degrees", degrees);
+		
 			return mapping.findForward("success");
+		}
 		else
 			return mapping.findForward("failure");
 	}

@@ -16,19 +16,21 @@ public class NameAction extends Action
 		ActionMessages errors = new ActionMessages();
 		
 		if(daf.get("firstName").toString().isEmpty())
-			errors.add("firstName", new ActionMessage("first name is required"));
+			errors.add("firstName", new ActionMessage("errors.required", "First name"));
 		else
 			session.setAttribute("firstName", daf.get("firstName").toString());
 
 		if(daf.get("lastName").toString().isEmpty())
-			errors.add("lastName", new ActionMessage("last name is required"));
+			errors.add("lastName", new ActionMessage("errors.required", "Last name"));
 		else
 			session.setAttribute("lastName", daf.get("lastName").toString());
 
 		if(daf.get("middleInitial").toString().isEmpty())
-			errors.add("middleInitial", new ActionMessage("middle initial is required"));
+			errors.add("middleInitial", new ActionMessage("errors.required", "Middle initial"));
 		else
 			session.setAttribute("middleInitial", daf.get("middleInitial").toString());
+		
+		saveErrors(request, errors);
 		
 		if(errors.isEmpty())		
 			return mapping.findForward("success");

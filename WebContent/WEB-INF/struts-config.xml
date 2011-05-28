@@ -11,96 +11,139 @@
 				<form-property name="address" type="java.lang.String" />
 				<form-property name="city" type="java.lang.String" />
 				<form-property name="state" type="java.lang.String" />
-				<form-property name="zipcode" type="java.lang.Integer" />
-				<form-property name="countrycode" type="java.lang.Integer" />
-				<form-property name="areacode" type="java.lang.Integer" />
-				<form-property name="phoneNumber" type="java.lang.Integer" />
+				<form-property name="zipcode" type="java.lang.String" />
+				<form-property name="countrycode" type="java.lang.String" />
+				<form-property name="areacode" type="java.lang.String" />
+				<form-property name="phoneNumber" type="java.lang.String" />
 			</form-bean>
 			<form-bean name="degreeForm" type="org.apache.struts.action.DynaActionForm">
-				<form-property name="major" type="java.lang.Integer" />
+				<form-property name="major" type="java.lang.String" />
 				<form-property name="title" type="java.lang.String" />
-				<form-property name="month" type="java.lang.Integer" />
-				<form-property name="year" type="java.lang.Integer" />
-				<form-property name="gpa" type="java.lang.Integer" />
+				<form-property name="month" type="java.lang.String" />
+				<form-property name="year" type="java.lang.String" />
+				<form-property name="gpa" type="java.lang.String" />
+			</form-bean>
+			<form-bean name="reviewerForm" type="org.apache.struts.action.DynaActionForm">
+				<form-property name="username" type="java.lang.String" />
+				<form-property name="password" type="java.lang.String" />
 			</form-bean>
 	</form-beans> 	
 
+	<!-- Applicants -->
+
 	<action-mappings>
-		<action path="/name"
+		
+		<action path="/applicants/myApplication"
+				type="CSE135S.Struts.dataentry.actions.MyApplicationAction" >
+			<forward name="success" path="/applicants/myApplication.jsp" />
+			<forward name="failure" path="/applicants/name.jsp" /> 
+		</action>
+		
+		<action path="/applicants/name"
 				type="CSE135S.Struts.dataentry.actions.NameAction"
 				scope="request"
 				name="nameForm"
-				input="/name.jsp">
-			<forward name="success" path="/countryOfCitizenship.do" />
-			<forward name="failure" path="/name.jsp" /> 
+				input="/applicants/name.jsp">
+			<forward name="success" path="/applicants/countryOfCitizenship.do" />
+			<forward name="failure" path="/applicants/name.jsp" /> 
 		</action>
 		
-		<action path="/countryOfCitizenship"
+		<action path="/applicants/countryOfCitizenship"
 				type="CSE135S.Struts.dataentry.actions.CitizenshipAction">
-			<forward name="success" path="/countryOfCitizenship.jsp" />
+			<forward name="success" path="/applicants/countryOfCitizenship.jsp" />
 		</action>
 		
-		<action path="/countryOfResidence"
+		<action path="/applicants/countryOfResidence"
 				type="CSE135S.Struts.dataentry.actions.ResidenceAction">
-			<forward name="success" path="/countryOfResidence.jsp" />
+			<forward name="success" path="/applicants/countryOfResidence.jsp" />
 		</action>
 		
-		<action path="/processResidence"
+		<action path="/applicants/processResidence"
 				type="CSE135S.Struts.dataentry.actions.ProcessResidenceAction" >
-			<forward name="success" path="/address.jsp" />
+			<forward name="success" path="/applicants/address.jsp" />
 		</action>
 		
-		<action path="/address"
+		<action path="/applicants/address"
 				type="CSE135S.Struts.dataentry.actions.AddressAction"
 				name="addressForm"
 				scope="request"
 				validate="true"
-				input="/address.jsp">
-			<forward name="success" path="/verifyResidence.do" />
-			<forward name="failure" path="/address.jsp" />
+				input="/applicants/address.jsp">
+			<forward name="success" path="/applicants/verifyResidence.do" />
+			<forward name="failure" path="/applicants/address.jsp" />
 		</action>
 		
-		<action path="/verifyResidence" 
+		<action path="/applicants/verifyResidence" 
 				type="CSE135S.Struts.dataentry.actions.VerifyResidenceAction" >
-			<forward name="verify" path="/verifyResidence.jsp" />
-			<forward name="success" path="/provideDegreeLocation.do" />
+			<forward name="verify" path="/applicants/verifyResidence.jsp" />
+			<forward name="success" path="/applicants/provideDegreeLocation.do" />
 		</action>
 		
-		<action path="/provideDegreeLocation" 
+		<action path="/applicants/provideDegreeLocation" 
 				type="CSE135S.Struts.dataentry.actions.ProvideDegreeLocationAction"
-				input="/verifyResidence.jsp" >
-			<forward name="success" path="/provideDegreeLocation.jsp" />
+				input="/applicants/verifyResidence.jsp" >
+			<forward name="success" path="/applicants/provideDegreeLocation.jsp" />
 		</action>
 		
-		<action path="/provideDegreeUniversity"
+		<action path="/applicants/provideDegreeUniversity"
 				type="CSE135S.Struts.dataentry.actions.ProvideDegreeUniversityAction">
-			<forward name="success" path="/provideDegreeUniversity.jsp" />
+			<forward name="success" path="/applicants/provideDegreeUniversity.jsp" />
 		</action>
 		
-		<action path="/provideDegreeMajor"
+		<action path="/applicants/provideDegreeMajor"
 				type="CSE135S.Struts.dataentry.actions.ProvideDegreeMajorAction">
-			<forward name="success" path="/provideDegreeMajor.jsp" />
+			<forward name="success" path="/applicants/provideDegreeMajor.jsp" />
 		</action>
 		
-		<action path="/processDegree"
+		<action path="/applicants/processDegree"
 				type="CSE135S.Struts.dataentry.actions.ProcessDegreeAction"
 				name="degreeForm"
 				scope="request"
 				validate="true"
-				input="/provideDegreeMajor.jsp">
-			<forward name="success" path="/verifyDegrees.jsp" />
-			<forward name="failure" path="/provideDegreeMajor.do" />
+				input="/applicants/provideDegreeMajor.jsp">
+			<forward name="success" path="/applicants/verifyDegrees.jsp" />
+			<forward name="failure" path="/applicants/provideDegreeMajor.do" />
 		</action>
 		
-		<action path="/submitApplication"
+		<action path="/applicants/submitApplication"
 				type="CSE135S.Struts.dataentry.actions.SubmitApplicationAction">
-			<forward name="success" path="confirmApplication.jsp" />
+			<forward name="success" path="/applicants/confirmApplication.jsp" />
 		</action>
 		
-		<action path="/cancelApplication"
+		<action path="/applicants/cancelApplication"
 				type="CSE135S.Struts.dataentry.actions.CancelApplicationAction">
-			<forward name="success" path="/name.jsp" />
+			<forward name="success" path="/applicants/name.jsp" />
+		</action>
+		
+		<action path="/admins/chairsHome"
+				type="CSE135S.Struts.dataentry.actions.ChairsHomeAction" >
+			<forward name="started" path="/admins/reviewStatus.do" />
+			<forward name="notstarted" path="/admins/verifyReviewers.jsp" />
+		</action>
+		
+		<action path="/admins/verifyReviewers"
+				type="CSE135S.Struts.dataentry.actions.VerifyReviewersAction" 
+				name="reviewerForm"
+				scope="request"
+				validate="true"
+				input="/admins/verifyReviewers.jsp">
+			<forward name="success" path="/admins/chairsHome.do" />
+			<forward name="failure" path="/admins/verifyReviewers.jsp" />
+		</action>
+		
+		<action path="/admins/deleteReviewer"
+				type="CSE135S.Struts.dataentry.actions.DeleteReviewerAction" >
+			<forward name="success" path="/admins/chairsHome.do" />
+		</action>		
+			
+		<action path="/admins/beginReview"
+				type="CSE135S.Struts.dataentry.actions.BeginReviewAction">
+			<forward name="success" path="/admins/reviewProcess.jsp" />
 		</action>
 	</action-mappings>
+
+	<!-- Admins -->
+
+	<message-resources parameter="MessageResources" /> 
 
 </struts-config>

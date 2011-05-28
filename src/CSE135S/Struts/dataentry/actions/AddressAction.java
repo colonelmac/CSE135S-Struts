@@ -21,19 +21,39 @@ public class AddressAction extends Action
 		ActionMessages errors = new ActionMessages();
 		
 		if(daf.get("address").toString().isEmpty())
-			errors.add("address", new ActionMessage("address is required"));
+			errors.add("address", new ActionMessage("errors.required", "Address"));
 		
 		if(daf.get("city").toString().isEmpty())
-			errors.add("city", new ActionMessage("city is required"));
+			errors.add("city", new ActionMessage("errors.required", "City"));
 			
-		if(daf.get("zipcode").toString().isEmpty())
-			errors.add("zipcode", new ActionMessage("zipcode is required"));
+		try 
+		{
+			int z = Integer.parseInt(daf.get("zipcode").toString());
+		}
+		catch(Exception ex)
+		{
+			errors.add("zipcode", new ActionMessage("errors.required", "Zipcode"));
+		}
+	
+		try 
+		{
+			int a = Integer.parseInt(daf.get("areacode").toString());
+		}
+		catch(Exception ex)
+		{
+			errors.add("areacode", new ActionMessage("errors.required", "Areacode"));
+		}
 		
-		if(daf.get("areacode").toString().isEmpty())
-			errors.add("areacode", new ActionMessage("areacode is required"));
+		try 
+		{
+			int p = Integer.parseInt(daf.get("phoneNumber").toString());
+		}
+		catch(Exception ex)
+		{
+			errors.add("phoneNumber", new ActionMessage("errors.required", "Phone number"));
+		}
 		
-		if(daf.get("phoneNumber").toString().isEmpty())
-			errors.add("phoneNumber", new ActionMessage("areacode is required"));
+		saveErrors(request, errors);
 		
 		Set<String> params = daf.getMap().keySet();
 		

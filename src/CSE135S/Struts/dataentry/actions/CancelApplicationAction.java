@@ -21,6 +21,8 @@ public class CancelApplicationAction extends Action
 			session.setAttribute(key, null);
 		}
 		
+		session.invalidate();
+				
 		return mapping.findForward("success");
 	}
 }

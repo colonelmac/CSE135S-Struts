@@ -9,6 +9,7 @@ public class MajorsModel
 {
 	private static String connectionString = "jdbc:postgresql://localhost/CSE135S?user=postgres&password=postgrespass";
 	private static String selectMajors = "SELECT id, name FROM majors";
+	private static String selectSpecializations = "SELECT id, name FROM specializations";
 	
 	public static CachedRowSet getMajors()
 	{
@@ -38,5 +39,34 @@ public class MajorsModel
 		
 		return null;
 		
+	}
+	
+	public static CachedRowSet getSpecialization()
+	{
+		try
+		{	
+			Class.forName("org.postgresql.Driver");
+			
+			Connection connection = DriverManager.getConnection(connectionString);
+			
+			Statement statement = connection.createStatement();
+			
+			ResultSet results = statement.executeQuery(selectSpecializations);
+			
+			CachedRowSet crs = new CachedRowSetImpl();
+			
+			crs.populate(results);
+			
+			results.close();
+			statement.close();
+			
+			return crs;
+		}
+		catch(Exception ex)
+		{
+			//do something
+		}
+		
+		return null;	
 	}
 }

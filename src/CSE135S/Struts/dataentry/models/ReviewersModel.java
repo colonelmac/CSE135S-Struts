@@ -9,10 +9,11 @@ public class ReviewersModel
 
 	private static String connectionString = "jdbc:postgresql://localhost/CSE135S?user=postgres&password=postgrespass";
 	private static String selectReviewStatus = "select inreview from review_status";
-	private static String updateReviewStatus = "update review_status set inreview=1";
+	private static String updateReviewStatus = "update review_status set inreview='1'";
 	private static String selectReviewers = "select user_ref AS id, user_name from user_roles where role='reviewer'";
 	private static String deleteReviewer = "delete from user_roles where user_ref = ?; delete from users where user_id = ?;"; 
-	private static String updateApplicant = "update applicants set reviewerid = ? where id = ?";
+	private static String updateApplicant = "update applicants set reviewerid = ?, statusid = '2' where id = ?";
+	private static String selectReviewerCount = "select COUNT(*) from applicants where reviewerid = ?";
 	
 	public static boolean hasReviewStarted()
 	{	
@@ -158,5 +159,31 @@ public class ReviewersModel
 		{
 			//do something
 		}
+	}
+
+	public static int getApplicantCountByReviewer(int reviewer)
+	{
+		try
+		{	
+			Class.forName("org.postgresql.Driver");
+			
+			Connection connection = DriverManager.getConnection(connectionString);
+			
+			PreparedStatement statement = connection.prepareStatement(selectReviewerCount);
+			
+			statement.setInt(1, reviewer);
+			
+			ResultSet results = statement.executeQuery();
+			
+			results.next();
+			
+			return results.getInt(1);
+		}
+		catch(Exception ex)
+		{
+			//do something
+		}
+		
+		return 0;	
 	}
 }

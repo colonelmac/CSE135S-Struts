@@ -44,7 +44,7 @@ Add a new reviewer:
 
 <% 
 	if(reviewerCount > 1)
-		out.println("<a href='/admins/beginReview.do'>Begin Review Process</a>");
+		out.println("<a href='beginReview.do'>Begin Review Process</a>");
 %>
 
 </body>

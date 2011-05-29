@@ -25,8 +25,8 @@
 <html:link action="/applicants/provideDegreeLocation.do">Add another Degree</html:link>
 
 <p>
-	<html:link action="/applicants/cancelApplication.do">Cancel</html:link>
-	<html:link href="verifyApplication.jsp">Continue</html:link>
+	<html:link action="/applicants/cancelApplication">Cancel</html:link>
+	<html:link action="/applicants/provideSpecialization">Continue</html:link>
 </p>
 
 </body>

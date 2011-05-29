@@ -59,6 +59,8 @@ public class SubmitApplicationAction extends Action
 			ResultSet results = statement.getGeneratedKeys();
 			results.next();
 			
+			int spec = 0; 
+			
 			for(Degree d : (ArrayList<Degree>)session.getAttribute("degrees"))
 			{
 				statement = connection.prepareStatement("INSERT INTO degrees (applicantid, title, majorid, specializationid, universityid, graduationdate, gpa)" + 
@@ -68,11 +70,14 @@ public class SubmitApplicationAction extends Action
 				statement.setString(2, d.title);
 				statement.setInt(3, d.major);
 				
-				int spec = d.specialization;
-				if( spec == 0 )
+				if( session.getAttribute("specializationid") == null )
 					statement.setNull(4, Types.INTEGER);
 				else
+				{
+					spec = Integer.parseInt(session.getAttribute("specializationid").toString());
+					d.specialization = spec; 
 					statement.setInt(4, spec);
+				}
 				
 				statement.setInt(5, d.university);
 				statement.setDate(6, d.graduationDate);
@@ -80,9 +85,10 @@ public class SubmitApplicationAction extends Action
 				
 				statement.execute();
 				
-				SQL.incrementApplicantCount("specializations", d.specialization);
 				SQL.incrementApplicantCount("majors", d.major);
 			}
+			
+			SQL.incrementApplicantCount("specializations", spec);
 		}
 		catch(Exception ex) 
 		{ 

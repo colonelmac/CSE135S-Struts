@@ -29,10 +29,12 @@ public class BeginReviewAction extends Action
 		
 		for(int a : applicants)
 		{
-			if(r > reviewers.size())
+			if(r == reviewers.size())
 				r = 0;
 			
 			ReviewersModel.assignReviewer(reviewers.get(r), a);
+			
+			r++;
 		}
 		
 		ReviewersModel.startReview();

@@ -19,5 +19,7 @@
 		</ul>
 	</html:form>
 	
+	<html:link action="/applicants/cancelApplication">Cancel</html:link>
+	
 </body>
 </html:html>

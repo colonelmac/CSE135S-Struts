@@ -30,5 +30,7 @@
 		</tbody>
 	</table>
 	
+	<% session.invalidate(); %>
+	
 </body>
 </html:html>

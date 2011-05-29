@@ -27,6 +27,9 @@
 				<form-property name="username" type="java.lang.String" />
 				<form-property name="password" type="java.lang.String" />
 			</form-bean>
+			<form-bean name="specializationForm" type="org.apache.struts.action.DynaActionForm">
+				<form-property name="specialization" type="java.lang.String" />
+			</form-bean>
 	</form-beans> 	
 
 	<!-- Applicants -->
@@ -105,6 +108,19 @@
 			<forward name="failure" path="/applicants/provideDegreeMajor.do" />
 		</action>
 		
+		<action path="/applicants/provideSpecialization"
+				type="CSE135S.Struts.dataentry.actions.ProvideSpecializationAction" >
+			<forward name="success" path="/applicants/provideSpecialization.jsp" />
+		</action>
+		
+		<action path="/applicants/processSpecialization"
+				type="CSE135S.Struts.dataentry.actions.ProcessSpecializationAction" 
+				name="specializationForm"
+				scope="request"
+				input="/applicants/provideSpecialization.jsp" >
+			<forward name="success" path="/applicants/submitApplication.do" />
+		</action>
+		
 		<action path="/applicants/submitApplication"
 				type="CSE135S.Struts.dataentry.actions.SubmitApplicationAction">
 			<forward name="success" path="/applicants/confirmApplication.jsp" />
@@ -112,12 +128,14 @@
 		
 		<action path="/applicants/cancelApplication"
 				type="CSE135S.Struts.dataentry.actions.CancelApplicationAction">
-			<forward name="success" path="/applicants/name.jsp" />
+			<forward name="success" path="/applicants/myApplication.do" />
 		</action>
+		
+		<!-- Admins -->
 		
 		<action path="/admins/chairsHome"
 				type="CSE135S.Struts.dataentry.actions.ChairsHomeAction" >
-			<forward name="started" path="/admins/reviewStatus.do" />
+			<forward name="started" path="/admins/reviewStatus.jsp" />
 			<forward name="notstarted" path="/admins/verifyReviewers.jsp" />
 		</action>
 		
@@ -138,11 +156,33 @@
 			
 		<action path="/admins/beginReview"
 				type="CSE135S.Struts.dataentry.actions.BeginReviewAction">
-			<forward name="success" path="/admins/reviewProcess.jsp" />
+			<forward name="success" path="/admins/reviewStatus.jsp" />
+		</action>
+		
+		<action path="/admins/applicationsByReviewer"
+				type="CSE135S.Struts.dataentry.actions.ApplicationsByReviewerAction">
+			<forward name="success" path="/admins/applicationsByReviewer.jsp" />
+		</action>
+		
+		<action path="/admins/applications"
+				type="CSE135S.Struts.dataentry.actions.ApplicationsAction" >
+			<forward name="success" path="/admins/applications.jsp" />
+		</action>
+		
+		<action path="/admins/acceptApplicant"
+				type="">
+		</action>
+		
+		<action path="/admins/rejectApplicant"
+				type="">
+		</action>
+		
+		<action path="/admins/cancelApplicant"
+				type="">
 		</action>
 	</action-mappings>
 
-	<!-- Admins -->
+	
 
 	<message-resources parameter="MessageResources" /> 
 

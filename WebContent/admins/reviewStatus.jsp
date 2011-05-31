@@ -11,7 +11,8 @@
 	<h2>Review Status</h2>
 
 	<ul>
-		<li><html:link action="/admins/applicationsByReviewer">Applications by Reviewer</html:link>
+		<li><html:link action="/admins/applications">All Applications</html:link>
+		<li><html:link action="/admins/applicationsByReviewer">Ungraded Applications by Reviewer</html:link>
 		<li><html:link action="/admins/specializationAnalytics">Specialization Analytics</html:link>
 		<li><html:link action="/admins/disciplineAnalytics">Discipline Analytics</html:link>
 	</ul>

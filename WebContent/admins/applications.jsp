@@ -38,7 +38,7 @@
 						out.println(applicants.getString("lastname"));
 					out.println("</td>");
 					out.println("<td>");
-						//put grade here
+						out.println(request.getAttribute(applicants.getString("id")).toString());
 					out.println("</td>");
 					out.println("<td>");
 						out.println(applicants.getString("status"));

@@ -8,9 +8,22 @@
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
+	<welcome-file>myApplication.do</welcome-file>
+	<welcome-file>chairsHome.do</welcome-file>
   </welcome-file-list>
   
-    <security-constraint>
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>Reviewer Resources</web-resource-name>
+      <!-- Define the context-relative URL(s) to be protected -->
+      <url-pattern>/reviewers/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>reviewer</role-name>
+    </auth-constraint>
+  </security-constraint>
+
+<security-constraint>
     <web-resource-collection>
       <web-resource-name>Applicant Resources</web-resource-name>
       <!-- Define the context-relative URL(s) to be protected -->
@@ -18,7 +31,6 @@
     </web-resource-collection>
     <auth-constraint>
       <role-name>applicant</role-name>
-      <role-name>admin</role-name>
     </auth-constraint>
   </security-constraint>
 
@@ -46,6 +58,9 @@
   <!-- Security roles referenced by this web application -->
   <security-role>
     <role-name>applicant</role-name>
+  </security-role>
+  <security-role>
+    <role-name>reviewer</role-name>
   </security-role>
   <security-role>
     <role-name>admin</role-name>

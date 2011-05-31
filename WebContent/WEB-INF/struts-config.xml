@@ -30,6 +30,14 @@
 			<form-bean name="specializationForm" type="org.apache.struts.action.DynaActionForm">
 				<form-property name="specialization" type="java.lang.String" />
 			</form-bean>
+			<form-bean name="applicationForm" type="org.apache.struts.action.DynaActionForm">
+				<form-property name="grade" type="java.lang.String" />
+				<form-property name="comments" type="java.lang.String" />
+			</form-bean>
+			<form-bean name="suggestedReviewerForm" type="org.apache.struts.action.DynaActionForm">
+				<form-property name="suggestedReviewer" type="java.lang.String" />
+			</form-bean>
+		
 	</form-beans> 	
 
 	<!-- Applicants -->
@@ -170,19 +178,77 @@
 		</action>
 		
 		<action path="/admins/acceptApplicant"
-				type="">
+				type="CSE135S.Struts.dataentry.actions.AcceptApplicantAction">
+			<forward name="success" path="/admins/applicationsByReviewer.do" />
 		</action>
 		
 		<action path="/admins/rejectApplicant"
-				type="">
+				type="CSE135S.Struts.dataentry.actions.RejectApplicantAction">
+			<forward name="success" path="/admins/applicationsByReviewer.do" />
 		</action>
 		
 		<action path="/admins/cancelApplicant"
-				type="">
+				type="CSE135S.Struts.dataentry.actions.CancelApplicantAction">
+			<forward name="success" path="/admins/applicationsByReviewer.do" />
 		</action>
+		
+		<action path="/admins/specializationAnalytics"
+				type="CSE135S.Struts.dataentry.actions.SpecializationAnalyticsAction" >
+			<forward name="success" path="/admins/specializationAnalytics.jsp" />
+		</action>
+		
+		<action path="/admins/disciplineAnalytics"
+				type="CSE135S.Struts.dataentry.actions.DisciplineAnalyticsAction" >
+			<forward name="success" path="/admins/disciplineAnalytics.jsp" />
+		</action>
+		
+		<!-- Reviewers -->
+		
+		<action path="/reviewers/reviewerDefault" 
+				type="CSE135S.Struts.dataentry.actions.ReviewersDefaultAction" >
+			<forward name="success" path="/reviewers/reviewerDefault.jsp" />
+		</action>
+		
+		<action path="/reviewers/application"
+				type="CSE135S.Struts.dataentry.actions.ReviewersApplicationAction">
+			<forward name="success" path="/reviewers/application.jsp" />
+		</action>
+		
+		<action path="/reviewers/processReview"
+				type="CSE135S.Struts.dataentry.actions.ProcessReviewAction"
+				name="applicationForm"
+				validate="true"
+				scope="request"
+				input="/reviewers/application.jsp">
+			<forward name="suggest" path="/reviewers/suggestReviewer.do" />
+			<forward name="complete" path="/reviewers/decideApplicantStatus.jsp" />
+		</action>
+				
+		<action path="/reviewers/suggestReviewer"
+				type="CSE135S.Struts.dataentry.actions.SuggestReviewerAction" >
+			<forward name="success" path="/reviewers/suggestReviewer.jsp" />
+		</action>
+		
+		<action path="/reviewers/processSuggestedReviewer"
+				type="CSE135S.Struts.dataentry.actions.ProcessSuggestedReviewerAction"
+				name="suggestedReviewerForm"
+				validate="false"
+				scope="request"
+				input="/reviewers/suggestReviewer.jsp">
+			<forward name="success" path="/reviewers/reviewerDefault.do" />
+		</action>
+		
+				<action path="/reviewers/acceptApplicant"
+				type="CSE135S.Struts.dataentry.actions.AcceptApplicantAction">
+			<forward name="success" path="/reviewers/reviewerDefault.do" />
+		</action>
+		
+		<action path="/reviewers/rejectApplicant"
+				type="CSE135S.Struts.dataentry.actions.RejectApplicantAction">
+			<forward name="success" path="/reviewers/reviewerDefault.do" />
+		</action>
+		
 	</action-mappings>
-
-	
 
 	<message-resources parameter="MessageResources" /> 
 

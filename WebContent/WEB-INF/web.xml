@@ -80,4 +80,14 @@
 		<servlet-name>action</servlet-name>
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>applicationServlet</servlet-name>
+		<servlet-class>CSE135S.AJAX.ApplicationServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>applicationServlet</servlet-name>
+		<url-pattern>/admins/applicationServlet</url-pattern>
+	</servlet-mapping>
 </web-app>
